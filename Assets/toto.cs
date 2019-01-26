@@ -15,4 +15,9 @@ public class toto : MonoBehaviour
     {
         
     }
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.Log ("PEHFOZE");
+	}
 }
