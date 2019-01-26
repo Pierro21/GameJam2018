@@ -7,6 +7,8 @@
 /Assets/AssetStoreTools*
 /.vs
 
+.idea/
+
 # UniGit specific. You can remove to save changes to UniGit in version control
 /Assets/Plugins/LibGit2Sharp*
 /Assets/Plugins/UniGit*
