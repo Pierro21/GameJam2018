@@ -13,18 +13,33 @@ public class EnemyCharacter : Character
     }
 
     // Update is called once per frame
-    void Update()
+
+    private IEnumerator Shoot()
     {
-        
+        _isShooting = true;
+        Move(0, true, false, false);
+        yield return new WaitForSeconds(2);
+        _isShooting = false;
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            var isDead = other.GetComponent<Character>().GetDamage(10);
-            if (isDead)
-                Debug.Log("I'm happy!!!");
+            if (!_isShooting)
+                StartCoroutine(Shoot());
         }
+    }
+
+    private void FixedUpdate()
+    {
+        var tmp = _weapon.transform.eulerAngles.z;
+        Debug.Log(m_FacingRight + ":::::" + tmp);
+        if (tmp < 250 && tmp > 110)
+        {
+            if (m_FacingRight)
+                Flip();
+        }
+        else if ((tmp < 70 || tmp > 290) && !m_FacingRight)
+            Flip();
     }
 }
