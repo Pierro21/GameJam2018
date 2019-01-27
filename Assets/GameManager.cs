@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public Vector2[] SpawnPositions;
 
     public Canvas canvas;
+    public GameObject fireworks;
+    public GameObject labelEnd;
+    
     private Character player;
     private Dictionary<string, uint> items;
     private List<string> backpack;
@@ -41,6 +44,11 @@ public class GameManager : MonoBehaviour
         if ((player._life <= 0 || player == null) && Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -99,6 +107,8 @@ public class GameManager : MonoBehaviour
             houseIndex++;
             Houses[houseIndex].SetActive(true);
             HouseUpdateClip.Play();
+            fireworks.SetActive(true);
+            labelEnd.GetComponent<TextMesh>().text = "Well done !";
         }
     }
 
