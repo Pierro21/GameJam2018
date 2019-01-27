@@ -33,7 +33,18 @@ public class Character : MonoBehaviour
     private IEnumerator RealGetDamage(float damage)
     {
         _life -= damage;
-        if (_life <= 0)
+        yield return CheckLife();
+
+        _anim.SetBool("Hit", true);
+        Debug.Log("Get hitt! Life:" + _life);
+        Debug.Log(_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        yield return new WaitForSeconds(_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        _anim.SetBool("Hit", false);
+    }
+
+    public IEnumerator CheckLife()
+    {
+        if (_life <= 0.075)
         {
             Debug.Log("I'm dead!!");
             _anim.SetBool("Die", true);
@@ -43,13 +54,6 @@ public class Character : MonoBehaviour
             _isAlive = false;
             yield break;
         }
-
-
-        _anim.SetBool("Hit", true);
-        Debug.Log("Get hitt! Life:" + _life);
-        Debug.Log(_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        yield return new WaitForSeconds(_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        _anim.SetBool("Hit", false);
     }
 
     public bool GetDamage(float damage)

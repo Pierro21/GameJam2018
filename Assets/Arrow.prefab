@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403df0007d0a4c998a3088fd85897bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 0.08
   _tag: Player
 --- !u!60 &3207416171173029276
 PolygonCollider2D:

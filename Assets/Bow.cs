@@ -21,7 +21,7 @@ public class Bow : Weapon
         _isShooting = true;
         GameObject clone;
         clone = Instantiate(_arrow, transform.position, Quaternion.Euler(transform.eulerAngles));
-        clone.GetComponent<Rigidbody2D>().AddForce(_target.position * 4, ForceMode2D.Impulse);
+        clone.GetComponent<Rigidbody2D>().AddForce((_target.position - transform.position) * 4, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         _isShooting = false;
     }

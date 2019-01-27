@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         while (player._life >= 0f)
         {
             player._life -= 0.0001f;
+            yield return player.CheckLife();
             Debug.Log(player._life);
             canvas.GetComponentInChildren<Image>().fillAmount = player._life;
             yield return new WaitForSeconds(0.03f);
