@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -35,6 +36,11 @@ public class GameManager : MonoBehaviour
         if (canvas.GetComponentInChildren<Image>().fillAmount <= 0f)
         {
             StartCoroutine(DecrementLife());
+        }
+        
+        if ((player._life <= 0 || player == null) && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1);
         }
     }
 
@@ -101,8 +107,13 @@ public class GameManager : MonoBehaviour
         while (player._life >= 0f)
         {
             player._life -= 0.0001f;
-            Debug.Log(player._life);
             canvas.GetComponentInChildren<Image>().fillAmount = player._life;
+            yield return new WaitForSeconds(0.03f);
+        }
+
+        if (player._life <= 0f)
+        {
+            canvas.GetComponentInChildren<Image>().fillAmount = 0;
             yield return new WaitForSeconds(0.03f);
         }
     }

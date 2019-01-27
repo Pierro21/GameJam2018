@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets._2D;
 
 public class Character : MonoBehaviour
@@ -30,12 +31,14 @@ public class Character : MonoBehaviour
     protected Rigidbody2D m_Rigidbody2D;
     public bool m_FacingRight = true; // For determining which way the player is currently facing.
     protected bool _isShooting = false;
+    public GameObject game_over;
     private IEnumerator RealGetDamage(float damage)
     {
         _life -= damage;
         if (_life <= 0)
         {
             Debug.Log("I'm dead!!");
+            game_over.SetActive(true);
             _anim.SetBool("Die", true);
             GetComponent<Animation>().Play();
             yield return new WaitForSeconds( GetComponent<Animation>().clip.length);
