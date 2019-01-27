@@ -33,7 +33,7 @@ public class EnemyCharacter : Character
     private void FixedUpdate()
     {
         var tmp = _weapon.transform.eulerAngles.z;
-        Debug.Log(m_FacingRight + ":::::" + tmp);
+        //Debug.Log(m_FacingRight + ":::::" + tmp);
         if (tmp < 250 && tmp > 110)
         {
             if (m_FacingRight)
