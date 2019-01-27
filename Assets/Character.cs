@@ -49,7 +49,8 @@ public class Character : MonoBehaviour
         if (_life <= 0.075)
         {
             Debug.Log("I'm dead!!");
-            game_over.SetActive(true);
+            if (game_over)
+                game_over.SetActive(true);
             _anim.SetBool("Die", true);
             GetComponent<Animation>().Play();
             yield return new WaitForSeconds( GetComponent<Animation>().clip.length);
