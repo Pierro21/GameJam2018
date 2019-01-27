@@ -53,11 +53,15 @@ public class GameManager : MonoBehaviour
     private void resetbackpack()
     {
         string[] itemArray = {"barrel", "log", "rock"};
+        int sum = 0;
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject.Find(itemArray[i] + "_value_panel").GetComponent<TextMesh>().text = items[itemArray[i]].ToString();
-            items["barrel"] = 0;
+            Debug.Log(i + " -> " + itemArray[i] + ": " + items[itemArray[i]]);
+            sum = (int) (items[itemArray[i]] + 
+                         long.Parse(GameObject.Find(itemArray[i] + "_value_panel").GetComponent<TextMesh>().text));
+            GameObject.Find(itemArray[i] + "_value_panel").GetComponent<TextMesh>().text = sum.ToString();
+            items[itemArray[i]] = 0;
             GameObject.Find(itemArray[i] + "_value").GetComponent<Text>().text = "0";
         }
 
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
     {
         int barrel, log, rock;
 
+        if (backpack.Count == 0)
+            return;
         foreach (var item in backpack)
         {
             houseStock.Add(item);
