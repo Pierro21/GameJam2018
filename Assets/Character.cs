@@ -4,7 +4,7 @@ using UnityStandardAssets._2D;
 
 public class Character : MonoBehaviour
 {
-    private int _life = 100;
+    public float _life = 1;
     private bool _isAlive = true;
     protected Animator _anim; // Reference to the player's animator component.
     [SerializeField] protected float m_MaxSpeed = 10f; // The fastest the player can travel in the x axis.
@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
     protected Rigidbody2D m_Rigidbody2D;
     public bool m_FacingRight = true; // For determining which way the player is currently facing.
     protected bool _isShooting = false;
-    private IEnumerator RealGetDamage(int damage)
+    private IEnumerator RealGetDamage(float damage)
     {
         _life -= damage;
         if (_life <= 0)
@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
         _anim.SetBool("Hit", false);
     }
 
-    public bool GetDamage(int damage)
+    public bool GetDamage(float damage)
     {
         if (!_anim.GetBool("Hit"))
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected int _damage;
+    [SerializeField] protected float _damage;
     protected bool _isShooting = false;
     [SerializeField] protected string _tag = "Player";
 

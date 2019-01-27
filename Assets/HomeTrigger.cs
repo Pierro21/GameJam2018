@@ -9,11 +9,13 @@ public class HomeTrigger : MonoBehaviour
 {
     private GameObject HUD;
 
+    private Character player;
     private bool isIncrementing;
     // Start is called before the first frame update
     void Start()
     {
         HUD = GameObject.FindGameObjectWithTag("Canvas");
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
         isIncrementing = false;
     }
 
@@ -26,9 +28,10 @@ public class HomeTrigger : MonoBehaviour
     IEnumerator IncrementLife()
     {
         isIncrementing = true;
-        while (HUD.GetComponentInChildren<Image>().fillAmount <= 0.9f)
+        while (player._life <= 0.9f)
         {
-            HUD.GetComponentInChildren<Image>().fillAmount += 0.001f;
+            player._life += 0.001f;
+            HUD.GetComponentInChildren<Image>().fillAmount = player._life;
             if (!isIncrementing)
                 yield break;
             yield return new WaitForSeconds(0.03f);

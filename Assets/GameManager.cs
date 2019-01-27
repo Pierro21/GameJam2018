@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Vector2[] SpawnPositions;
 
     public Canvas canvas;
+    private Character player;
     private Dictionary<string, uint> items;
     private List<string> backpack;
     private List<string> houseStock;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         items = new Dictionary<string, uint> {{"barrel", 0}, {"rock", 0}, {"log", 0}};
         houseStock = new List<string>();
         backpack = new List<string>();
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
         
         StartCoroutine(DecrementLife());
     }
@@ -90,9 +92,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DecrementLife()
     {
-        while (canvas.GetComponentInChildren<Image>().fillAmount >= 0f)
+        while (player._life >= 0f)
         {
-            canvas.GetComponentInChildren<Image>().fillAmount -= 0.0001f;
+            player._life -= 0.0001f;
+            Debug.Log(player._life);
+            canvas.GetComponentInChildren<Image>().fillAmount = player._life;
             yield return new WaitForSeconds(0.03f);
         }
     }
